@@ -21,7 +21,7 @@ namespace Diplom.UserControls
             LoadChurches(regionId);
         }
 
-      private async void LoadChurches(int regionId)
+     private async void LoadChurches(int regionId)
     {
         try
         {
@@ -104,7 +104,9 @@ namespace Diplom.UserControls
                 NavigationManager.NavigateTo(churchDetailControl);
                 
             }
+            
         }
+        
 
         private void InitializeComponent()
         {

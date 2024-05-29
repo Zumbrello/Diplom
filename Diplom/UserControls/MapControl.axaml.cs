@@ -393,6 +393,16 @@ namespace Diplom.UserControls
         {
             Environment.Exit(0);
         }
+
+        private void Info_PointerEnter(object sender, PointerEventArgs e)
+        {
+            InfoToolTip.IsOpen = true;
+        }
+
+        private void Info_PointerLeave(object sender, PointerEventArgs e)
+        {
+            InfoToolTip.IsOpen = false;
+        }
     }
 
     public class Region 

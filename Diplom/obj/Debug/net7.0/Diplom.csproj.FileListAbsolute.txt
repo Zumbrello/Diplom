@@ -161,3 +161,4 @@ E:\RiderProj\Diplom\Diplom\obj\Debug\net7.0\Diplom.pdb
 E:\RiderProj\Diplom\Diplom\obj\Debug\net7.0\Diplom.csproj.Up2Date
 E:\RiderProj\Diplom\Diplom\obj\Debug\net7.0\Diplom.genruntimeconfig.cache
 E:\RiderProj\Diplom\Diplom\obj\Debug\net7.0\ref\Diplom.dll
+E:\RiderProj\Diplom\Diplom\obj\Debug\net7.0\Diplom.sourcelink.json

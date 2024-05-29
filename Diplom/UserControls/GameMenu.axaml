@@ -52,7 +52,7 @@
                     CornerRadius="10"
                     Width="133"
                     >
-            <Button Content="Сбросить паззл"
+            <Button Content="Сбросить пазл"
                     Click="OnResetImageClick"
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"/>
