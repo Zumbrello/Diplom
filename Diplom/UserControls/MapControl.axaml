@@ -1,0 +1,118 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="Diplom.UserControls.MapControl">
+    <Grid Name="MainGrid" ColumnDefinitions="1*,6*,2*" RowDefinitions="*,5*,1.2*" Background="#FFF9EB">
+        
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Image Source="/Assets/logo.png" Width="150" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Canvas x:Name="MainCanvas" PointerMoved="Canvas_PointerMoved" PointerPressed="Canvas_PointerPressed">
+                <Image Name="Image1" Source="/Assets/risunok1.png" Canvas.Left="100" Canvas.Top="-362" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image2" Source="/Assets/risunok2.png" Canvas.Left="269" Canvas.Top="-200" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image3" Source="/Assets/risunok3.png" Canvas.Left="380" Canvas.Top="-407" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image4" Source="/Assets/risunok4.png" Canvas.Left="447" Canvas.Top="-318" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image5" Source="/Assets/risunok5.png" Canvas.Left="596" Canvas.Top="-306" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image6" Source="/Assets/risunok6.png" Canvas.Left="74" Canvas.Top="-75" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image7" Source="/Assets/risunok7.png" Canvas.Left="237" Canvas.Top="-219" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image8" Source="/Assets/risunokk8.png" Canvas.Left="300" Canvas.Top="-95" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image9" Source="/Assets/risunok9.png" Canvas.Left="362" Canvas.Top="-125" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image10" Source="/Assets/risunok10.png" Canvas.Left="467" Canvas.Top="-218" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image11" Source="/Assets/risunok11.png" Canvas.Left="424" Canvas.Top="-102.3" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image12" Source="/Assets/risunok12.png" Canvas.Left="542" Canvas.Top="-99" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image13" Source="/Assets/risunok13.png" Canvas.Left="600" Canvas.Top="17" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image14" Source="/Assets/risunok14.png" Canvas.Left="135" Canvas.Top="-38" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image15" Source="/Assets/risunok15.png" Canvas.Left="413" Canvas.Top="60" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image16" Source="/Assets/risunok16.png" Canvas.Left="501" Canvas.Top="95" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image17" Source="/Assets/risunok17.png" Canvas.Left="558" Canvas.Top="8" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image18" Source="/Assets/risunok18.png" Canvas.Left="632" Canvas.Top="212" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image19" Source="/Assets/risunok19.png" Canvas.Left="410" Canvas.Top="158" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Image Name="Image20" Source="/Assets/risunok20.png" Canvas.Left="559" Canvas.Top="230" Height="1100" PointerMoved="Image_PointerMoved" PointerExited="Image_PointerExited"/>
+                <Border Background="#FFFFFF" 
+                        Opacity="0.5" 
+                        IsVisible="False"
+                        x:Name="ToolTipBackground">
+                    <Border.Effect>
+                        <BlurEffect Radius="8"/>
+                    </Border.Effect>
+                </Border>
+                <TextBlock x:Name="RegionToolTip" 
+                           Foreground="Black"
+                           Background="#00FFFFFF"
+                           FontSize="23" 
+                           TextAlignment="Center" 
+                           TextWrapping="Wrap"
+                           Padding="5"
+                           IsVisible="False"/>
+            </Canvas>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left"  Margin="10">
+            <Border BorderBrush="#2DBD39"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Background="#FFF9EB">
+                <Button Click="Menu_Click"
+                        Foreground="Black"
+                        FontSize="16"
+                        Content="Меню с играми и тестами"/>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+            <TextBlock Text="Список регионов:" 
+                       Foreground="Black" 
+                       FontSize="25" 
+                       VerticalAlignment="Bottom" 
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
+            <Border BorderBrush="#2DBD39" 
+                    BorderThickness="2" 
+                    CornerRadius="10" 
+                    Background="#FFF9EB">
+                <Button  Click="ExitButton_Click" 
+                         Foreground="Black" 
+                         FontSize="16"
+                         Content="Выход"/>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+            <TextBlock Text="Карта Великоустюгского округа" 
+                       Foreground="Black" 
+                       FontSize="35"
+                       FontWeight="Bold"/>
+        </StackPanel>
+        <Border Grid.Column="2" 
+                Grid.RowSpan="2"  
+                Grid.Row="1"  
+                CornerRadius="4" 
+                BorderBrush="#2DBD39" 
+                BorderThickness="3"
+                Margin="0,0,10,10">
+            <ScrollViewer  VerticalScrollBarVisibility="Auto">
+                <ListBox Name="RegionsListBox" 
+                     SelectionChanged="RegionsListBox_SelectionChanged"
+                     Background="#FFF9EB">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel PointerMoved="RegionsListBox_PointerMoved"  PointerExited="RegionsListBox_PointerLeave">
+                                <Border BorderThickness="3"
+                                        BorderBrush="#2DBD39" 
+                                        CornerRadius="10">
+                                    <TextBlock Text="{Binding Nameofregion}" 
+                                               VerticalAlignment="Center" 
+                                               FontSize="25" 
+                                               Foreground="Black"
+                                               HorizontalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,111 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.6"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.6"/>
+        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.18" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.6"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.16" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.16">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.16" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.16">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+        <PackageReference Include="Svg.Skia" Version="1.0.0.18" />
+        <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+    </ItemGroup>
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**\*.*" />
+    </ItemGroup>
+
+
+   <!-- <ItemGroup>
+      <None Remove="Images\karta.png" />
+      <AvaloniaResource Include="Assets\karta.png" />
+      <None Remove="Images\111111.png" />
+      <AvaloniaResource Include="Assets\111111.png" />
+      <None Remove="Assets\risunok1.svg" />
+      <None Remove="Assets\risunok2.svg" />
+      <None Remove="Assets\risunok3.svg" />
+      <None Remove="Assets\risunok4.svg" />
+      <None Remove="Assets\risunok5.svg" />
+      <None Remove="Assets\risunok6.svg" />
+      <None Remove="Assets\risunok7.svg" />
+      <None Remove="Assets\risunok9.svg" />
+      <None Remove="Assets\risunok10.svg" />
+      <None Remove="Assets\risunok11.svg" />
+      <None Remove="Assets\risunok12.svg" />
+      <None Remove="Assets\risunok13.svg" />
+      <None Remove="Assets\risunok14.svg" />
+      <None Remove="Assets\risunok15.svg" />
+      <None Remove="Assets\risunok16.svg" />
+      <None Remove="Assets\risunok17.svg" />
+      <None Remove="Assets\risunok18.svg" />
+      <None Remove="Assets\risunok19.svg" />
+      <None Remove="Assets\risunok20.svg" />
+      <None Remove="Assets\risunokk8.svg" />
+      <None Remove="Assets\risunok1_red.svg" />
+      <None Remove="Assets\risunok1.png" />
+      <AvaloniaResource Include="Assets\risunok1.png" />
+      <None Remove="Assets\risunok1_red.png" />
+      <AvaloniaResource Include="Assets\risunok1_green.png" />
+      <None Remove="Assets\risunok2.png" />
+      <AvaloniaResource Include="Assets\risunok2.png" />
+      <None Remove="Assets\risunok3.png" />
+      <AvaloniaResource Include="Assets\risunok3.png" />
+      <None Remove="Assets\risunok4.png" />
+      <AvaloniaResource Include="Assets\risunok4.png" />
+      <None Remove="Assets\risunok5.png" />
+      <AvaloniaResource Include="Assets\risunok5.png" />
+      <None Remove="Assets\risunok6.png" />
+      <AvaloniaResource Include="Assets\risunok6.png" />
+      <None Remove="Assets\risunok7.png" />
+      <AvaloniaResource Include="Assets\risunok7.png" />
+      <None Remove="Assets\risunok9.png" />
+      <AvaloniaResource Include="Assets\risunok9.png" />
+      <None Remove="Assets\risunok10.png" />
+      <AvaloniaResource Include="Assets\risunok10.png" />
+      <None Remove="Assets\risunok11.png" />
+      <AvaloniaResource Include="Assets\risunok11.png" />
+      <None Remove="Assets\risunok12.png" />
+      <AvaloniaResource Include="Assets\risunok12.png" />
+      <None Remove="Assets\risunok13.png" />
+      <AvaloniaResource Include="Assets\risunok13.png" />
+      <None Remove="Assets\risunok14.png" />
+      <AvaloniaResource Include="Assets\risunok14.png" />
+      <None Remove="Assets\risunok15.png" />
+      <AvaloniaResource Include="Assets\risunok15.png" />
+      <None Remove="Assets\risunok16.png" />
+      <AvaloniaResource Include="Assets\risunok16.png" />
+      <None Remove="Assets\risunok17.png" />
+      <AvaloniaResource Include="Assets\risunok17.png" />
+      <None Remove="Assets\risunok18.png" />
+      <AvaloniaResource Include="Assets\risunok18.png" />
+      <None Remove="Assets\risunok19.png" />
+      <AvaloniaResource Include="Assets\risunok19.png" />
+      <None Remove="Assets\risunok20.png" />
+      <AvaloniaResource Include="Assets\risunok20.png" />
+      <None Remove="Assets\risunokk8.png" />
+      <AvaloniaResource Include="Assets\risunokk8.png" />
+      <None Remove="Assets\risunok2_red.png" />
+      <AvaloniaResource Include="Assets\risunok2_green.png" />
+    </ItemGroup>-->
+</Project>

@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Diplom.UserControls.ChurchDetailControl">
+    <Grid Name="MainGrid" Margin="10" Background="#FFF9EB" ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок статьи -->
+        <TextBlock x:Name="ChurchNameTextBlock" Text="{Binding ChurchName}" Foreground="Black" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" Grid.Row="0"/>
+
+        <!-- Описание статьи -->
+        <TextBlock x:Name="DescriptionTextBlock" Text="{Binding Description}" Foreground="Black"  FontSize="20" TextWrapping="Wrap" Margin="0,20,0,35" Grid.Row="1"/>
+
+        <!-- Галерея изображений -->
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,0,0" HorizontalAlignment="Center">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="PhotosItemsControl" ItemsSource="{Binding Photos}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5">
+                                <Image  Source="{Binding ImageSource}" Stretch="UniformToFill"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+
+        <!-- Кнопка Назад -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,0,0" >
+        <Border   BorderBrush="#2DBD39" 
+                 BorderThickness="2" 
+                 CornerRadius="10" 
+                 Background="#FFF9EB"
+                 Margin="0,0,40,0">
+        <Button HorizontalAlignment="Left" 
+                Click="OnBackButtonClick" 
+                Foreground="Black" FontSize="16"
+                Content="Вернуться к списку церквей"/>
+        </Border>
+            <Border   BorderBrush="#2DBD39" 
+                      BorderThickness="2" 
+                      CornerRadius="10" 
+                      Background="#FFF9EB">
+                <Button HorizontalAlignment="Left" 
+                        Click="OnMapButtonClick" 
+                        Foreground="Black" FontSize="16"
+                        Content="Вернуться к карте"/>
+            </Border>
+        </StackPanel>
+        <!--<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,0,0">
+            
+        </StackPanel>-->
+    </Grid>
+</UserControl>

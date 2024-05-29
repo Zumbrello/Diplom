@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Diplom/App.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/MainWindow.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurcesControl.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchDetailControl.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchDetailView.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchDetailWindow.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchItemView.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchListView.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchesControl.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/ChurchesWindow.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/GameMenu.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/MapControl.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/RegionControl.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/UserControls/puzzles.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/Window1.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/Windows/ChurchDetailWindow.axaml" value="Diplom/Diplom.csproj" />
+        <entry key="Diplom/Windows/ChurchesWindow.axaml" value="Diplom/Diplom.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

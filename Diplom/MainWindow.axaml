@@ -1,0 +1,13 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        MinHeight="900"
+        x:Class="Diplom.MainWindow"
+        Icon="Assets/logo (1).ico"
+        WindowState="Maximized"
+        CanResize="False"
+        Title="Regions">
+    <ContentControl x:Name="ContentControl"/>
+</Window>
