@@ -18,25 +18,25 @@ namespace Diplom.UserControls
         private AllDTO.ChurchDto _church;
         private ObservableCollection<ImageViewModel> _photos;
         private int _regionId;
+        private bool IsRussian;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChurchDetailControl(AllDTO.ChurchDto church, int regionId)
+        public ChurchDetailControl(AllDTO.ChurchDto church, int regionId, bool isRussian)
         {
             InitializeComponent();
-            _church = church;
+            _church = church ?? throw new ArgumentNullException(nameof(church)); // Предупреждение CS8602
             _regionId = regionId;
+            IsRussian = isRussian;
             _photos = new ObservableCollection<ImageViewModel>();
 
-            this.FindControl<TextBlock>("ChurchNameTextBlock").Text = _church.Churchname;
-            this.FindControl<TextBlock>("DescriptionTextBlock").Text = _church.Description;
+            this.FindControl<TextBlock>("ChurchNameTextBlock").Text = _church.GetChurchname(IsRussian);
+            this.FindControl<TextBlock>("DescriptionTextBlock").Text = _church.GetDescription(IsRussian);
             this.FindControl<ItemsControl>("PhotosItemsControl").ItemsSource = _photos;
 
             LoadChurchDetails();
+            UpdateUIForLanguage();
         }
-
-        public string ChurchName => _church?.Churchname;
-        public string Description => _church?.Description;
 
         public ObservableCollection<ImageViewModel> Photos
         {
@@ -50,9 +50,6 @@ namespace Diplom.UserControls
 
         private async void LoadChurchDetails()
         {
-            OnPropertyChanged(nameof(ChurchName));
-            OnPropertyChanged(nameof(Description));
-
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:5249/");
@@ -105,17 +102,26 @@ namespace Diplom.UserControls
 
         private void OnBackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationManager.NavigateTo(new ChurcesControl(_regionId));
+            NavigationManager.NavigateTo(new ChurchesControl(_regionId, IsRussian));
+        }
+
+        private void OnMapButtonClick(object sender, RoutedEventArgs e)
+        {
+            NavigationManager.NavigateTo(new MapControl(IsRussian));
+        }
+
+        private void UpdateUIForLanguage()
+        {
+            var backButton = this.FindControl<Button>("BackButton");
+            var mapButton = this.FindControl<Button>("MapButton");
+
+            backButton.Content = IsRussian ? "Вернуться к списку церквей" : "Back to Churches List";
+            mapButton.Content = IsRussian ? "Вернуться к карте" : "Back to Map";
         }
 
         public class ImageViewModel
         {
             public Bitmap ImageSource { get; set; }
-        }
-        
-        private void OnMapButtonClick(object? sender, RoutedEventArgs e)
-        {
-            NavigationManager.NavigateTo(new MapControl());
         }
     }
 }

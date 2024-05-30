@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Diplom.UserControls.MapControl">
-    <Grid Name="MainGrid" ColumnDefinitions="1*,6*,2*" RowDefinitions="*,5*,1.2*" Background="#FFF9EB" ShowGridLines="False">
-        
+    <Grid Name="MainGrid" ColumnDefinitions="1*,6*,2*" RowDefinitions="*,5*,1.2*" Background="#FFF9EB" ShowGridLines="True">
+        <StackPanel> 
+                
+            </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="0">
             <Image Source="/Assets/logo.png" Width="150" />
         </StackPanel>
@@ -49,7 +51,7 @@
                            IsVisible="False"/>
             </Canvas>
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left"  Margin="10">
+         <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" Margin="10">
             <Border BorderBrush="#2DBD39"
                     BorderThickness="2"
                     CornerRadius="10"
@@ -57,16 +59,31 @@
                 <Button Click="Menu_Click"
                         Foreground="Black"
                         FontSize="16"
-                        Content="Меню с играми и тестами"/>
+                        Content="{Binding MenuButtonContent}"/>
             </Border>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
-            <TextBlock Text="Список районов:" 
+            <TextBlock Text="{Binding RegionsListLabel}" 
                        Foreground="Black" 
                        FontSize="25" 
                        VerticalAlignment="Bottom" 
                        HorizontalAlignment="Center"
                        FontWeight="Bold"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,5">
+            <Border BorderBrush="#2DBD39"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Background="#FFF9EB"
+                    Margin="0,0,20,0">
+            <Button Content="Русский" Click="SwitchToRussian_Click"/>
+            </Border>
+              <Border BorderBrush="#2DBD39"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Background="#FFF9EB">
+            <Button Content="English" Click="SwitchToEnglish_Click"/>
+            </Border>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10">
             <Border BorderBrush="#2DBD39" 
@@ -76,11 +93,11 @@
                 <Button  Click="ExitButton_Click" 
                          Foreground="Black" 
                          FontSize="16"
-                         Content="Выход"/>
+                         Content="{Binding ExitButtonContent}"/>
             </Border>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="0"  HorizontalAlignment="Center"  VerticalAlignment="Center">
-            <TextBlock Text="Карта Великоустюгского округа" 
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding MapTitle}" 
                        Foreground="Black" 
                        FontSize="35"
                        FontWeight="Bold"/>
@@ -92,21 +109,23 @@
                 BorderBrush="#2DBD39" 
                 BorderThickness="3"
                 Margin="0,0,10,10">
-            <ScrollViewer  VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListBox Name="RegionsListBox" 
-                     SelectionChanged="RegionsListBox_SelectionChanged"
-                     Background="#FFF9EB">
+                         SelectionChanged="RegionsListBox_SelectionChanged"
+                         Background="#FFF9EB">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel PointerMoved="RegionsListBox_PointerMoved"  PointerExited="RegionsListBox_PointerLeave">
+                            <StackPanel PointerMoved="RegionsListBox_PointerMoved" PointerExited="RegionsListBox_PointerLeave">
                                 <Border BorderThickness="3"
                                         BorderBrush="#2DBD39" 
                                         CornerRadius="10">
-                                    <TextBlock Text="{Binding Nameofregion}" 
-                                               VerticalAlignment="Center" 
-                                               FontSize="25" 
-                                               Foreground="Black"
-                                               HorizontalAlignment="Center"/>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Nameofregion}" 
+                                                   VerticalAlignment="Center" 
+                                                   FontSize="25" 
+                                                   Foreground="Black"
+                                                   HorizontalAlignment="Center"/>
+                                    </StackPanel>
                                 </Border>
                             </StackPanel>
                         </DataTemplate>
@@ -118,7 +137,7 @@
             <Image Source="/Assets/info.png" Width="50" PointerMoved="Info_PointerEnter" PointerExited="Info_PointerLeave"/>
             <Popup Name="InfoToolTip" IsLightDismissEnabled="False" Placement="Right">
                 <Border Background="#FFF9EB" BorderBrush="#2DBD39" BorderThickness="2" CornerRadius="5">
-                    <TextBlock FontSize="18" Text="Данное приложение разработано по книге С. А. Мальцева 'Храмы и часовни Великоустюгского округа'"/>
+                    <TextBlock FontSize="18" Text="{Binding InfoToolTipText}"/>
                 </Border>
             </Popup>
         </StackPanel>

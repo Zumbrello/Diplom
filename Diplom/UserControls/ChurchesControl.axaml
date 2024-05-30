@@ -1,9 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="Diplom.UserControls.ChurcesControl">
+             x:Class="Diplom.UserControls.ChurchesControl">
     <Grid Name="MainGrid" ColumnDefinitions="1*,6*,2*" RowDefinitions="Auto,*,Auto" ShowGridLines="False" Background="#FFF9EB">
         <StackPanel Grid.Row="0" Grid.Column="0">
             <Image Source="/Assets/logo.png" Width="150" />
@@ -33,10 +30,10 @@
                                 <StackPanel Grid.Column="1" Orientation="Vertical" 
                                             VerticalAlignment="Center"
                                             Margin="0,0,30,0">
-                                    <TextBlock Text="{Binding Churchname}" 
+                                    <TextBlock Text="{Binding ChurchnameDisplay}" 
                                                FontSize="35" 
                                                Foreground="Black"/>
-                                    <TextBlock Text="{Binding BuildDate}" 
+                                    <TextBlock Text="{Binding BuildDateDisplay}" 
                                                FontSize="20" 
                                                Foreground="Black"/>
                                 </StackPanel>
@@ -51,7 +48,7 @@
                     BorderThickness="2" 
                     CornerRadius="10" 
                     Background="#FFF9EB">
-                <Button HorizontalAlignment="Left"  
+                <Button x:Name="BackButton" HorizontalAlignment="Left"  
                         Click="OnBackButtonClick"
                         Foreground="Black"
                         FontSize="16"

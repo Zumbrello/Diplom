@@ -34,6 +34,3 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [E:/RiderProj/Diplom/Diplom/UserControls/MapControl.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
-[E:/RiderProj/Diplom/Diplom/UserControls/puzzles.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 
@@ -22,17 +23,21 @@ namespace Diplom.UserControls
         private const int BorderPadding = 5; // Padding around the puzzle area
         private const string ApiUrl = "http://localhost:5249/api/churches/photos"; // API URL
         private const string BytesApiUrl = "http://localhost:5249/api/churches/photos/bytes/"; // API URL for image bytes
-        public GameMenu()
+        private bool IsRussian;
+
+        public GameMenu(bool isRussian)
         {
             InitializeComponent();
+            IsRussian = isRussian;
             PuzzleCanvas = this.FindControl<Canvas>("PuzzleCanvas");
             PuzzleBorder = this.FindControl<Border>("PuzzleBorder");
             ReferenceImage = this.FindControl<Image>("ReferenceImage");
             ReferencePanel = this.FindControl<StackPanel>("ReferencePanel");
+            UpdateUIForLanguage();
         }
+
         private void Puzzles_click(object? sender, RoutedEventArgs e)
         {
-            TestStackPanel.IsVisible = false;
             PuzzlesGame.IsVisible = true;
             ReferencePanel.IsVisible = true;
             LoadNewPuzzle();
@@ -45,7 +50,6 @@ namespace Diplom.UserControls
                 var randomImageName = await GetRandomImageNameAsync(ApiUrl);
                 if (!string.IsNullOrEmpty(randomImageName))
                 {
-                    Console.WriteLine($"Image Name: {randomImageName}"); // Отладочная информация
                     var bitmap = await LoadBitmapFromBytesAsync(BytesApiUrl + Uri.EscapeDataString(randomImageName));
                     if (bitmap != null)
                     {
@@ -54,17 +58,17 @@ namespace Diplom.UserControls
                     }
                     else
                     {
-                        ShowMessage("Failed to load the bitmap from the API.");
+                        ShowMessage(IsRussian ? "Не удалось загрузить изображение с API." : "Failed to load the bitmap from the API.");
                     }
                 }
                 else
                 {
-                    ShowMessage("Failed to get a valid image name from the API.");
+                    ShowMessage(IsRussian ? "Не удалось получить допустимое имя изображения с API." : "Failed to get a valid image name from the API.");
                 }
             }
             catch (Exception ex)
             {
-                ShowMessage($"Error loading image: {ex.Message}");
+                ShowMessage($"{(IsRussian ? "Ошибка при загрузке изображения" : "Error loading image")}: {ex.Message}");
             }
         }
 
@@ -77,12 +81,10 @@ namespace Diplom.UserControls
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
                     response.EnsureSuccessStatusCode();
                     string jsonResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"API Response: {jsonResponse}"); // Отладочная информация
 
                     var photos = JsonConvert.DeserializeObject<List<Photo>>(jsonResponse);
                     if (photos != null && photos.Count > 0)
                     {
-                        // Исключаем фото с именем "zaglushka.png"
                         photos = photos.FindAll(photo => photo.NamePhoto != "zaglushka.png");
 
                         if (photos.Count == 0)
@@ -98,7 +100,7 @@ namespace Diplom.UserControls
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error getting image name: {ex.Message}"); // Отладочная информация
+                    Console.WriteLine($"Error getting image name: {ex.Message}");
                     throw;
                 }
             }
@@ -120,7 +122,7 @@ namespace Diplom.UserControls
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error loading bitmap from bytes: {ex.Message}"); // Отладочная информация
+                    Console.WriteLine($"Error loading bitmap from bytes: {ex.Message}");
                     return null;
                 }
             }
@@ -136,8 +138,8 @@ namespace Diplom.UserControls
             var pieceWidth = bitmap.PixelSize.Width / PuzzleSize;
             var pieceHeight = bitmap.PixelSize.Height / PuzzleSize;
 
-            var canvasWidth = Math.Min(bitmap.PixelSize.Width + BorderPadding * 2, 600);
-            var canvasHeight = Math.Min(bitmap.PixelSize.Height + BorderPadding * 2, 600);
+            var canvasWidth = bitmap.PixelSize.Width + BorderPadding * 2;
+            var canvasHeight = bitmap.PixelSize.Height + BorderPadding * 2;
 
             PuzzleCanvas.Width = canvasWidth;
             PuzzleCanvas.Height = canvasHeight;
@@ -159,7 +161,6 @@ namespace Diplom.UserControls
                         Height = pieceHeight
                     };
 
-                    // Position pieces randomly within the puzzle canvas bounds, considering the border padding
                     var initialX = _random.Next(BorderPadding, Math.Max(BorderPadding + 1, (int)(canvasWidth - pieceWidth - BorderPadding)));
                     var initialY = _random.Next(BorderPadding, Math.Max(BorderPadding + 1, (int)(canvasHeight - pieceHeight - BorderPadding)));
 
@@ -191,7 +192,6 @@ namespace Diplom.UserControls
 
             _draggingOffset = e.GetPosition(_draggingPiece);
 
-            // Переместить кусок на верхний уровень
             SetZIndex(_draggingPiece, 1);
         }
 
@@ -201,7 +201,6 @@ namespace Diplom.UserControls
             {
                 var position = e.GetPosition(PuzzleCanvas) - _draggingOffset;
 
-                // Ensure the piece stays within the bounds of the puzzle area
                 position = new Point(
                     Math.Clamp(position.X, BorderPadding, PuzzleCanvas.Bounds.Width - _draggingPiece.Bounds.Width - BorderPadding),
                     Math.Clamp(position.Y, BorderPadding, PuzzleCanvas.Bounds.Height - _draggingPiece.Bounds.Height - BorderPadding)
@@ -218,7 +217,6 @@ namespace Diplom.UserControls
             {
                 CheckPiecePosition(_draggingPiece);
 
-                // Сбросить ZIndex для всех кусков после завершения перемещения
                 foreach (var piece in _puzzlePieces)
                 {
                     SetZIndex(piece.Image, 0);
@@ -236,11 +234,10 @@ namespace Diplom.UserControls
             var currentX = Canvas.GetLeft(piece);
             var currentY = Canvas.GetTop(piece);
 
-            // Ensure piece is within the puzzle border
             if (currentX < BorderPadding || currentX > PuzzleCanvas.Bounds.Width - piece.Width - BorderPadding ||
                 currentY < BorderPadding || currentY > PuzzleCanvas.Bounds.Height - piece.Height - BorderPadding)
             {
-                ShowMessage("Piece is out of bounds");
+                ShowMessage(IsRussian ? "Кусок вне границ" : "Piece is out of bounds");
                 return;
             }
 
@@ -248,7 +245,7 @@ namespace Diplom.UserControls
             {
                 Canvas.SetLeft(piece, pieceData.CorrectPosition.X);
                 Canvas.SetTop(piece, pieceData.CorrectPosition.Y);
-                piece.IsHitTestVisible = false; // Disable further interaction with correctly placed pieces
+                piece.IsHitTestVisible = false;
             }
 
             CheckPuzzleCompletion();
@@ -272,18 +269,23 @@ namespace Diplom.UserControls
 
         private void OnPuzzleCompleted()
         {
-            ShowMessage("Подзравляю, пазл собран!");
+            ShowMessage(IsRussian ? "Поздравляем, пазл собран!" : "Congratulations, puzzle completed!");
         }
 
         private void ShowMessage(string message)
         {
             var messageBox = new Window
             {
-                Content = new TextBlock
+                Background = new SolidColorBrush(Color.Parse("#FFF9EB")),
+                Content = new Border
                 {
-                    Text = message,
-                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                    VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center
+                    Background = new SolidColorBrush(Color.Parse("#FFF9EB")),
+                    Child = new TextBlock
+                    {
+                        Text = message,
+                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                        VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                    }
                 },
                 Width = 200,
                 Height = 100
@@ -295,12 +297,6 @@ namespace Diplom.UserControls
         private void SetZIndex(Control control, int zIndex)
         {
             control.ZIndex = zIndex;
-        }
-
-        private void Test_OnClick(object? sender, RoutedEventArgs e)
-        {
-            PuzzlesGame.IsVisible = false;
-            TestStackPanel.IsVisible = true;
         }
 
         private void OnResetImageClick(object? sender, RoutedEventArgs e)
@@ -315,9 +311,38 @@ namespace Diplom.UserControls
         {
             LoadNewPuzzle();
         }
+
         private void OnBackButtonClick(object? sender, RoutedEventArgs e)
         {
-            NavigationManager.NavigateTo(new MapControl());
+            NavigationManager.NavigateTo(new MapControl(IsRussian));
         }
+
+        private void UpdateUIForLanguage()
+        {
+            var backButton = this.FindControl<Button>("BackButton");
+            var menuTitle = this.FindControl<TextBlock>("MenuTitle");
+            var puzzlesButton = this.FindControl<Button>("PuzzlesButton");
+            var resetPuzzleButton = this.FindControl<Button>("ResetPuzzleButton");
+            var newPuzzleButton = this.FindControl<Button>("NewPuzzleButton");
+
+            backButton.Content = IsRussian ? "Вернуться к карте" : "Back to Map";
+            menuTitle.Text = IsRussian ? "Меню игр" : "Games Menu";
+            puzzlesButton.Content = IsRussian ? "Игра паззлы" : "Puzzle Game";
+            resetPuzzleButton.Content = IsRussian ? "Сбросить пазл" : "Reset Puzzle";
+            newPuzzleButton.Content = IsRussian ? "Новый пазл" : "New Puzzle";
+        }
+    }
+
+    public class Photo
+    {
+        public int Id { get; set; }
+        public string NamePhoto { get; set; } = string.Empty;
+        public List<string> PhotoOfHrams { get; set; } = new List<string>();
+    }
+
+    public class PuzzlePiece
+    {
+        public Image Image { get; set; } = null!;
+        public Point CorrectPosition { get; set; }
     }
 }
