@@ -31,7 +31,7 @@ namespace Diplom.UserControls
         {
             InitializeComponent();
             IsRussian = isRussian;
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:5249/") };
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://194.146.242.26:6666/") };
             InitializeRegionImages();
             LoadRegions();
             UpdateUIForLanguage();
@@ -379,11 +379,11 @@ namespace Diplom.UserControls
                                 RegionToolTip.Text = regionName;
                                 RegionToolTip.IsVisible = true;
                                 ToolTipBackground.IsVisible = true;
-                                Canvas.SetLeft(RegionToolTip, point.X + 10); // сместите на 10 пикселей вправо от курсора
-                                Canvas.SetTop(RegionToolTip, point.Y + 10);  // сместите на 10 пикселей вниз от курсора
+                                Canvas.SetLeft(RegionToolTip, point.X + 10); // смещение на 10 пикселей вправо от курсора
+                                Canvas.SetTop(RegionToolTip, point.Y + 10);  // смещение на 10 пикселей вниз от курсора
 
-                                Canvas.SetLeft(ToolTipBackground, point.X + 10); // сместите на 10 пикселей вправо от курсора
-                                Canvas.SetTop(ToolTipBackground, point.Y + 10);  // сместите на 10 пикселей вниз от курсора
+                                Canvas.SetLeft(ToolTipBackground, point.X + 10); // смещение на 10 пикселей вправо от курсора
+                                Canvas.SetTop(ToolTipBackground, point.Y + 10);  // смещение на 10 пикселей вниз от курсора
                                 ToolTipBackground.Width = RegionToolTip.Bounds.Width + 10;
                                 ToolTipBackground.Height = RegionToolTip.Bounds.Height + 10;
                                 break;
@@ -455,7 +455,7 @@ namespace Diplom.UserControls
                 var bitmap = new Bitmap(stream);
                 var width = bitmap.PixelSize.Width;
                 var height = bitmap.PixelSize.Height;
-                var stride = width * 4; // 4 bytes per pixel for BGRA format
+                var stride = width * 4; 
                 var pixelData = new byte[height * stride];
                 var handle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
                 try
@@ -509,12 +509,12 @@ namespace Diplom.UserControls
                             RegionToolTip.IsVisible = true;
                             ToolTipBackground.IsVisible = true;
 
-                            var canvasPoint = e.GetPosition(MainCanvas); // Используйте MainCanvas вместо image
-                            Canvas.SetLeft(RegionToolTip, canvasPoint.X + 10); // сместите на 10 пикселей вправо от курсора
-                            Canvas.SetTop(RegionToolTip, canvasPoint.Y + 10);  // сместите на 10 пикселей вниз от курсора
+                            var canvasPoint = e.GetPosition(MainCanvas); 
+                            Canvas.SetLeft(RegionToolTip, canvasPoint.X + 10); // смещение на 10 пикселей вправо от курсора
+                            Canvas.SetTop(RegionToolTip, canvasPoint.Y + 10);  // смещение на 10 пикселей вниз от курсора
 
-                            Canvas.SetLeft(ToolTipBackground, canvasPoint.X + 10); // сместите на 10 пикселей вправо от курсора
-                            Canvas.SetTop(ToolTipBackground, canvasPoint.Y + 10);  // сместите на 10 пикселей вниз от курсора
+                            Canvas.SetLeft(ToolTipBackground, canvasPoint.X + 10); // смещение на 10 пикселей вправо от курсора
+                            Canvas.SetTop(ToolTipBackground, canvasPoint.Y + 10);  // смещение на 10 пикселей вниз от курсора
                             ToolTipBackground.Width = RegionToolTip.Bounds.Width + 10;
                             ToolTipBackground.Height = RegionToolTip.Bounds.Height + 10;
                         }

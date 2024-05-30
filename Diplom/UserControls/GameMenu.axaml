@@ -26,12 +26,12 @@
                      BorderBrush="#2DBD39" 
                      CornerRadius="10" 
                      Margin="0,0,0,10">
-                <Button x:Name="PuzzlesButton" Content="Игра паззлы" Click="Puzzles_click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+                <Button x:Name="PuzzlesButton" Content="Игра пазлы" Click="Puzzles_click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
             </Border>
         </StackPanel>
-        <StackPanel Background="Aqua" Orientation="Vertical" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" x:Name="TestStackPanel" IsVisible="False">
+        <!--<StackPanel Background="Aqua" Orientation="Vertical" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" x:Name="TestStackPanel" IsVisible="False">
             <TextBlock Text="Другой элемент"/>
-        </StackPanel>
+        </StackPanel>-->
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" x:Name="PuzzlesGame" IsVisible="False">
             <Border x:Name="PuzzleBorder" BorderBrush="#2DBD39" BorderThickness="2"  Margin="10">
                 <Canvas x:Name="PuzzleCanvas" Background="LightGray"/>
@@ -45,18 +45,18 @@
             <Border BorderThickness="3"
                     BorderBrush="#2DBD39" 
                     CornerRadius="10"
-                    >
+                    HorizontalAlignment="Center">
                 <Button x:Name="ResetPuzzleButton" Content="Сбросить пазл"
                         Click="OnResetImageClick"
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center"/>
+                        />
             </Border>
             <Border BorderThickness="3"
                     BorderBrush="#2DBD39" 
                     CornerRadius="10"
+                    HorizontalAlignment="Center"
                    
                     Margin="0,10,0,0">
-                <Button x:Name="NewPuzzleButton" Content="Новый пазл" Click="OnNewPuzzleClick" HorizontalAlignment="Center"/>
+                <Button x:Name="NewPuzzleButton" Content="Новый пазл" Click="OnNewPuzzleClick"/>
             </Border>
         </StackPanel>
     </Grid>

@@ -4,7 +4,7 @@ public class Region
 {
     public int Id { get; set; }
     public string NameofregionEng { get; set; }
-    public string Nameofregion { get; set; }  // Сделаем свойство публичным и автоматическим
+    public string Nameofregion { get; set; }  
     public object Tag { get; set; }
     
     public string IsRussian(bool isRu)

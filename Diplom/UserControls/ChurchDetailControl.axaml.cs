@@ -25,7 +25,7 @@ namespace Diplom.UserControls
         public ChurchDetailControl(AllDTO.ChurchDto church, int regionId, bool isRussian)
         {
             InitializeComponent();
-            _church = church ?? throw new ArgumentNullException(nameof(church)); // Предупреждение CS8602
+            _church = church ?? throw new ArgumentNullException(nameof(church));
             _regionId = regionId;
             IsRussian = isRussian;
             _photos = new ObservableCollection<ImageViewModel>();
@@ -52,7 +52,7 @@ namespace Diplom.UserControls
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:5249/");
+                client.BaseAddress = new Uri("http://http://194.146.242.26:6666/");
                 HttpResponseMessage photoResponse = await client.GetAsync($"api/churches/{_church.Id}/photos");
                 if (photoResponse.IsSuccessStatusCode)
                 {
@@ -61,7 +61,7 @@ namespace Diplom.UserControls
                     {
                         foreach (var photo in photos)
                         {
-                            var imageUrl = $"http://localhost:5249/api/churches/photos/bytes/{photo.NamePhoto}";
+                            var imageUrl = $"http://194.146.242.26:6666/api/churches/photos/bytes/{photo.NamePhoto}";
                             try
                             {
                                 using (var stream = await client.GetStreamAsync(imageUrl))

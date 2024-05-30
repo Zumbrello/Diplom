@@ -18,11 +18,11 @@ namespace Diplom.UserControls
     {
         private List<PuzzlePiece> _puzzlePieces = new List<PuzzlePiece>();
         private Random _random = new Random();
-        private const int PuzzleSize = 4; // 4x4 pieces
-        private const double Tolerance = 10.0; // Allowable tolerance for snapping
-        private const int BorderPadding = 5; // Padding around the puzzle area
-        private const string ApiUrl = "http://localhost:5249/api/churches/photos"; // API URL
-        private const string BytesApiUrl = "http://localhost:5249/api/churches/photos/bytes/"; // API URL for image bytes
+        private const int PuzzleSize = 4; // 4x4 форма
+        private const double Tolerance = 10.0; 
+        private const int BorderPadding = 5; 
+        private const string ApiUrl = "http://http://194.146.242.26:6666/api/churches/photos"; // API URL
+        private const string BytesApiUrl = "http://http://194.146.242.26:6666/api/churches/photos/bytes/"; // API URL for image bytes
         private bool IsRussian;
 
         public GameMenu(bool isRussian)
@@ -327,7 +327,7 @@ namespace Diplom.UserControls
 
             backButton.Content = IsRussian ? "Вернуться к карте" : "Back to Map";
             menuTitle.Text = IsRussian ? "Меню игр" : "Games Menu";
-            puzzlesButton.Content = IsRussian ? "Игра паззлы" : "Puzzle Game";
+            puzzlesButton.Content = IsRussian ? "Игра пазлы" : "Puzzle Game";
             resetPuzzleButton.Content = IsRussian ? "Сбросить пазл" : "Reset Puzzle";
             newPuzzleButton.Content = IsRussian ? "Новый пазл" : "New Puzzle";
         }

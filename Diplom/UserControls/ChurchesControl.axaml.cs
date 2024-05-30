@@ -31,7 +31,7 @@ namespace Diplom.UserControls
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:5249/");
+                    client.BaseAddress = new Uri("http://194.146.242.26:6666/");
                     HttpResponseMessage response = await client.GetAsync($"api/churches/region/{regionId}");
                     response.EnsureSuccessStatusCode();
 
@@ -89,7 +89,7 @@ namespace Diplom.UserControls
 
         private void OnBackButtonClick(object sender, RoutedEventArgs e)
         {
-            NavigationManager.NavigateTo(new MapControl(IsRussian)); // Передаем текущий язык при возвращении на карту
+            NavigationManager.NavigateTo(new MapControl(IsRussian)); 
         }
 
         private void ChurchesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
